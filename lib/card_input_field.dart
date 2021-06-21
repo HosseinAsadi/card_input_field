@@ -47,7 +47,7 @@ class _CardInputFieldState extends State<CardInputField> {
 
   Widget input(
       FocusNode self,
-      FocusNode next,
+      FocusNode? next,
       TextEditingController controller,
       ) =>
       Padding(
@@ -77,7 +77,6 @@ class _CardInputFieldState extends State<CardInputField> {
             onChanged: (val) {
               self.unfocus();
               if (next != null) FocusScope.of(context).requestFocus(next);
-              return val;
             },
           ),
         ),
@@ -91,7 +90,7 @@ class _CardInputFieldState extends State<CardInputField> {
       FocusNode self3,
       FocusNode next3,
       FocusNode self4,
-      FocusNode next4,
+      FocusNode? next4,
       TextEditingController controller1,
       TextEditingController controller2,
       TextEditingController controller3,

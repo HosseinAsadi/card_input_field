@@ -1,15 +1,65 @@
-# card_input_field
+## card_input_field
+16 inputs field like bank card for enter your card number
 
-A new Flutter package.
+![](https://github.com/HosseinAsadi/card_input_field/tree/master/assets/1.jpeg)
 
-## Getting Started
+## Usage
+
+## Import this line in Flutter pubspec
+```dart
+card_input_field: <Last Version>
+```
+## TO Use
+```dart
+import 'package:card_input_field/card_input_field.dart';
+```
+
+After import library
+
+##
+```dart
+CardInputField cardInput = CardInputField();
+```
+
+After into a Widget like below use it
 
 
+```dart
+Center(child: cardInput)
+```
 
-It is very simple to use, just look at the main file into git repository
+and for read value of fields into onTap or onPressed a button
+
+```dart
+onTap: (){
+    cardInput.controllers.forEach((element) {
+        print(element.text);
+    });
+}
+```
+
+or set a value into a field
+```dart
+onTap: (){
+    cardNumberInput.controllers[0].text = '4';
+}
+```
+
+## and do not forget
+
+```dart
+@override
+void dispose() {
+    /// number of controllers is 16
+    cardNumberInput.controllers.forEach((element) {
+      element.dispose();
+    });
+    super.dispose();
+}
+```
 
 
-
+It is very simple to use, you can see main file into git repository
 
 
 This project is a starting point for a Dart
