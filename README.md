@@ -4,7 +4,12 @@ A new Flutter package.
 
 ## Getting Started
 
-It is very simple to use, just look at the main file
+
+
+It is very simple to use, just look at the main file into git repository
+
+
+
 
 
 This project is a starting point for a Dart
