@@ -4,6 +4,9 @@ A new Flutter package.
 
 ## Getting Started
 
+It is very simple to use, just look at the main file
+
+
 This project is a starting point for a Dart
 [package](https://flutter.dev/developing-packages/),
 a library module containing code that can be shared easily across
