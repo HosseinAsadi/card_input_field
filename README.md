@@ -1,7 +1,7 @@
 ## card_input_field
-16 inputs field like bank card for enter your card number
+16 inputs field like bank card number for enter your card number
 
-![](https://github.com/HosseinAsadi/card_input_field/tree/master/assets/1.jpeg)
+![](https://github.com/HosseinAsadi/card_input_field/blob/master/assets/1.jpeg)
 
 ## Usage
 
@@ -41,7 +41,7 @@ onTap: (){
 or set a value into a field
 ```dart
 onTap: (){
-    cardNumberInput.controllers[0].text = '4';
+    cardInput.controllers[0].text = '4';
 }
 ```
 
@@ -51,7 +51,7 @@ onTap: (){
 @override
 void dispose() {
     /// number of controllers is 16
-    cardNumberInput.controllers.forEach((element) {
+    cardInput.controllers.forEach((element) {
       element.dispose();
     });
     super.dispose();

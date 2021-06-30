@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -46,6 +49,7 @@ class _CardInputFieldState extends State<CardInputField> {
   ];
 
   Widget input(
+      FocusNode? before,
       FocusNode self,
       FocusNode? next,
       TextEditingController controller,
@@ -75,14 +79,20 @@ class _CardInputFieldState extends State<CardInputField> {
             //   if (next != null) FocusScope.of(context).requestFocus(next);
             // },
             onChanged: (val) {
-              self.unfocus();
-              if (next != null) FocusScope.of(context).requestFocus(next);
+              if (val != '' && next != null) {
+                self.unfocus();
+                FocusScope.of(context).requestFocus(next);
+              } else if (before != null) {
+                self.unfocus();
+                FocusScope.of(context).requestFocus(before);
+              }
             },
           ),
         ),
       );
 
   Widget box(
+      FocusNode? before1,
       FocusNode self1,
       FocusNode next1,
       FocusNode self2,
@@ -105,13 +115,25 @@ class _CardInputFieldState extends State<CardInputField> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            input(self1, next1, controller1),
-            input(self2, next2, controller2),
-            input(self3, next3, controller3),
-            input(self4, next4, controller4),
+            input(before1, self1, next1, controller1),
+            input(self1, self2, next2, controller2),
+            input(self2, self3, next3, controller3),
+            input(self3, self4, next4, controller4),
           ],
         ),
       );
+	  
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(milliseconds: 200), () {
+      for (int i = 0; i < widget.controllers.length; i++)
+        if (widget.controllers[i].text == '') {
+          focusNodes[i].requestFocus();
+          break;
+        }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,6 +143,7 @@ class _CardInputFieldState extends State<CardInputField> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           box(
+            null,
             focusNodes[0],
             focusNodes[1],
             focusNodes[1],
@@ -135,6 +158,7 @@ class _CardInputFieldState extends State<CardInputField> {
             widget.controllers[3],
           ),
           box(
+            focusNodes[3],
             focusNodes[4],
             focusNodes[5],
             focusNodes[5],
@@ -149,6 +173,7 @@ class _CardInputFieldState extends State<CardInputField> {
             widget.controllers[7],
           ),
           box(
+            focusNodes[7],
             focusNodes[8],
             focusNodes[9],
             focusNodes[9],
@@ -163,6 +188,7 @@ class _CardInputFieldState extends State<CardInputField> {
             widget.controllers[11],
           ),
           box(
+            focusNodes[11],
             focusNodes[12],
             focusNodes[13],
             focusNodes[13],
