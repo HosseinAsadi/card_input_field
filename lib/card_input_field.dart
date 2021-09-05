@@ -10,18 +10,6 @@ class CardInputField extends StatefulWidget {
     TextEditingController(),
     TextEditingController(),
     TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
   ];
 
   @override
@@ -30,18 +18,6 @@ class CardInputField extends StatefulWidget {
 
 class _CardInputFieldState extends State<CardInputField> {
   List<FocusNode> focusNodes = [
-    FocusNode(),
-    FocusNode(),
-    FocusNode(),
-    FocusNode(),
-    FocusNode(),
-    FocusNode(),
-    FocusNode(),
-    FocusNode(),
-    FocusNode(),
-    FocusNode(),
-    FocusNode(),
-    FocusNode(),
     FocusNode(),
     FocusNode(),
     FocusNode(),
@@ -57,7 +33,7 @@ class _CardInputFieldState extends State<CardInputField> {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 3.0),
         child: SizedBox(
-          width: 12.0,
+          width: 70.0,
           height: 35.0,
           child: TextField(
             controller: controller,
@@ -65,9 +41,9 @@ class _CardInputFieldState extends State<CardInputField> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly,
             ],
-            maxLength: 1,
-            showCursor: false,
-            style: TextStyle(fontSize: 14.0),
+            maxLength: 4,
+            style: const TextStyle(fontSize: 14.0, letterSpacing: 3.0),
+            textAlign: TextAlign.center,
             decoration: InputDecoration(
               counterText: '',
               contentPadding: const EdgeInsets.only(top: -10.0),
@@ -79,10 +55,10 @@ class _CardInputFieldState extends State<CardInputField> {
             //   if (next != null) FocusScope.of(context).requestFocus(next);
             // },
             onChanged: (val) {
-              if (val != '' && next != null) {
+              if (val.length == 4 && next != null) {
                 self.unfocus();
                 FocusScope.of(context).requestFocus(next);
-              } else if (before != null) {
+              } else if (before != null && val.length == 0) {
                 self.unfocus();
                 FocusScope.of(context).requestFocus(before);
               }
@@ -92,19 +68,10 @@ class _CardInputFieldState extends State<CardInputField> {
       );
 
   Widget box(
-      FocusNode? before1,
-      FocusNode self1,
-      FocusNode next1,
-      FocusNode self2,
-      FocusNode next2,
-      FocusNode self3,
-      FocusNode next3,
-      FocusNode self4,
-      FocusNode? next4,
-      TextEditingController controller1,
-      TextEditingController controller2,
-      TextEditingController controller3,
-      TextEditingController controller4,
+      FocusNode? before,
+      FocusNode self,
+      FocusNode? next,
+      TextEditingController controller,
       ) =>
       Container(
         decoration: BoxDecoration(
@@ -112,15 +79,7 @@ class _CardInputFieldState extends State<CardInputField> {
           borderRadius: BorderRadius.circular(4.0),
         ),
         padding: const EdgeInsets.only(bottom: 8.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            input(before1, self1, next1, controller1),
-            input(self1, self2, next2, controller2),
-            input(self2, self3, next3, controller3),
-            input(self3, self4, next4, controller4),
-          ],
-        ),
+        child: input(before, self, next, controller),
       );
 	  
   @override
@@ -128,7 +87,7 @@ class _CardInputFieldState extends State<CardInputField> {
     super.initState();
     Timer(Duration(milliseconds: 200), () {
       for (int i = 0; i < widget.controllers.length; i++)
-        if (widget.controllers[i].text == '') {
+        if (widget.controllers[i].text.length < 4) {
           focusNodes[i].requestFocus();
           break;
         }
@@ -142,66 +101,20 @@ class _CardInputFieldState extends State<CardInputField> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          box(null, focusNodes[0], focusNodes[1], widget.controllers[0]),
           box(
-            null,
             focusNodes[0],
             focusNodes[1],
+            focusNodes[2],
+            widget.controllers[1],
+          ),
+          box(
             focusNodes[1],
             focusNodes[2],
-            focusNodes[2],
             focusNodes[3],
-            focusNodes[3],
-            focusNodes[4],
-            widget.controllers[0],
-            widget.controllers[1],
             widget.controllers[2],
-            widget.controllers[3],
           ),
-          box(
-            focusNodes[3],
-            focusNodes[4],
-            focusNodes[5],
-            focusNodes[5],
-            focusNodes[6],
-            focusNodes[6],
-            focusNodes[7],
-            focusNodes[7],
-            focusNodes[8],
-            widget.controllers[4],
-            widget.controllers[5],
-            widget.controllers[6],
-            widget.controllers[7],
-          ),
-          box(
-            focusNodes[7],
-            focusNodes[8],
-            focusNodes[9],
-            focusNodes[9],
-            focusNodes[10],
-            focusNodes[10],
-            focusNodes[11],
-            focusNodes[11],
-            focusNodes[12],
-            widget.controllers[8],
-            widget.controllers[9],
-            widget.controllers[10],
-            widget.controllers[11],
-          ),
-          box(
-            focusNodes[11],
-            focusNodes[12],
-            focusNodes[13],
-            focusNodes[13],
-            focusNodes[14],
-            focusNodes[14],
-            focusNodes[15],
-            focusNodes[15],
-            null,
-            widget.controllers[12],
-            widget.controllers[13],
-            widget.controllers[14],
-            widget.controllers[15],
-          ),
+          box(focusNodes[2], focusNodes[3], null, widget.controllers[3]),
         ],
       ),
     );

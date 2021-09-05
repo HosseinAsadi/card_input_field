@@ -1,8 +1,6 @@
 name: card_input_field
-description: A new Flutter package.
-version: 0.2.1
-authors:
-  - Hossein_Asadi
+description: Flutter plugin for input bank card number.
+version: 1.0.0
 homepage: https://github.com/HosseinAsadi/card_input_field
 
 environment:

@@ -41,7 +41,7 @@ onTap: (){
 or set a value into a field
 ```dart
 onTap: (){
-    cardInput.controllers[0].text = '4';
+    cardInput.controllers[0].text = '4556';
 }
 ```
 
@@ -50,7 +50,7 @@ onTap: (){
 ```dart
 @override
 void dispose() {
-    /// number of controllers is 16
+    /// number of controllers is 4
     cardInput.controllers.forEach((element) {
       element.dispose();
     });

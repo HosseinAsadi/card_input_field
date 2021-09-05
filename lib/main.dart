@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void dispose() {
 
-    /// number of controllers is 16
+    /// number of controllers is 4
     cardNumberInput.controllers.forEach((element) {
       element.dispose();
     });
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// you can set value for any of inputs like below
   void setValueForAnyField(){
-    cardNumberInput.controllers[0].text = '4';
+    cardNumberInput.controllers[0].text = '4556';
   }
 
   @override
