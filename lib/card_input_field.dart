@@ -42,7 +42,7 @@ class _CardInputFieldState extends State<CardInputField> {
               FilteringTextInputFormatter.digitsOnly,
             ],
             maxLength: 4,
-            style: const TextStyle(fontSize: 14.0, letterSpacing: 3.0),
+            style: const TextStyle(fontSize: 14.0, letterSpacing: 5.0),
             textAlign: TextAlign.center,
             decoration: InputDecoration(
               counterText: '',
