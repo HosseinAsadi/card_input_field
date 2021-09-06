@@ -1,5 +1,5 @@
 ## card_input_field
-16 inputs field like bank card number for enter your card number
+4 inputs field like bank card number for enter your card number
 
 ![](https://github.com/HosseinAsadi/card_input_field/blob/master/assets/1.jpeg)
 
