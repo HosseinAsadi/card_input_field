@@ -66,7 +66,7 @@ class _CardInputFieldState extends State<CardInputField> {
               } else if (before != null && val.length == 0) {
                 self.unfocus();
                 FocusScope.of(context).requestFocus(before);
-              } else if (next == null && widget.nextFocusNode != null) {
+              } else if (next == null && val.length == 4 && widget.nextFocusNode != null) {
                 self.unfocus();
                 FocusScope.of(context).requestFocus(widget.nextFocusNode);
               }
