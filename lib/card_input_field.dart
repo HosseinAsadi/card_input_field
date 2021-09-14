@@ -12,6 +12,10 @@ class CardInputField extends StatefulWidget {
     TextEditingController(),
   ];
 
+  FormFieldValidator<String> onChanged;
+
+  CardInputField({this.onChanged});
+
   @override
   _CardInputFieldState createState() => _CardInputFieldState();
 }
@@ -44,6 +48,7 @@ class _CardInputFieldState extends State<CardInputField> {
             maxLength: 4,
             style: const TextStyle(fontSize: 14.0, letterSpacing: 5.0),
             textAlign: TextAlign.center,
+            onChanged: widget.onChanged,
             decoration: InputDecoration(
               counterText: '',
               contentPadding: const EdgeInsets.only(top: -10.0),
