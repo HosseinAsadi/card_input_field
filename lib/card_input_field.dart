@@ -12,9 +12,10 @@ class CardInputField extends StatefulWidget {
     TextEditingController(),
   ];
 
-  FormFieldValidator<String> onChanged;
+  FocusNode? nextFocusNode;
+  Function? onChanged;
 
-  CardInputField({this.onChanged});
+  CardInputField({this.onChanged, this.nextFocusNode});
 
   @override
   _CardInputFieldState createState() => _CardInputFieldState();
@@ -29,11 +30,11 @@ class _CardInputFieldState extends State<CardInputField> {
   ];
 
   Widget input(
-      FocusNode? before,
-      FocusNode self,
-      FocusNode? next,
-      TextEditingController controller,
-      ) =>
+    FocusNode? before,
+    FocusNode self,
+    FocusNode? next,
+    TextEditingController controller,
+  ) =>
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 3.0),
         child: SizedBox(
@@ -48,7 +49,6 @@ class _CardInputFieldState extends State<CardInputField> {
             maxLength: 4,
             style: const TextStyle(fontSize: 14.0, letterSpacing: 5.0),
             textAlign: TextAlign.center,
-            onChanged: widget.onChanged,
             decoration: InputDecoration(
               counterText: '',
               contentPadding: const EdgeInsets.only(top: -10.0),
@@ -66,18 +66,22 @@ class _CardInputFieldState extends State<CardInputField> {
               } else if (before != null && val.length == 0) {
                 self.unfocus();
                 FocusScope.of(context).requestFocus(before);
+              } else if (next == null && widget.nextFocusNode != null) {
+                self.unfocus();
+                FocusScope.of(context).requestFocus(widget.nextFocusNode);
               }
+              if (widget.onChanged != null) widget.onChanged!();
             },
           ),
         ),
       );
 
   Widget box(
-      FocusNode? before,
-      FocusNode self,
-      FocusNode? next,
-      TextEditingController controller,
-      ) =>
+    FocusNode? before,
+    FocusNode self,
+    FocusNode? next,
+    TextEditingController controller,
+  ) =>
       Container(
         decoration: BoxDecoration(
           color: Theme.of(context).backgroundColor,
@@ -86,7 +90,7 @@ class _CardInputFieldState extends State<CardInputField> {
         padding: const EdgeInsets.only(bottom: 8.0),
         child: input(before, self, next, controller),
       );
-	  
+
   @override
   void initState() {
     super.initState();

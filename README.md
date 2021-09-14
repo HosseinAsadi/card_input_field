@@ -21,6 +21,8 @@ After import library
 CardInputField cardInput = CardInputField();
 ```
 
+you can also pass onChange and nextFocusNode to constructor
+
 After into a Widget like below use it
 
 
