@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -29,9 +28,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   CardInputField cardNumberInput = CardInputField();
 
+  /// you can set value for any of inputs like below
+  void setValueForAnyField() {
+    cardNumberInput.controllers[0].text = '4556';
+  }
+
   @override
   void dispose() {
-
     /// number of controllers is 4
     cardNumberInput.controllers.forEach((element) {
       element.dispose();
@@ -39,10 +42,12 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-
-  /// you can set value for any of inputs like below
-  void setValueForAnyField(){
-    cardNumberInput.controllers[0].text = '4556';
+  @override
+  void initState() {
+    super.initState();
+    cardNumberInput.onChanged = () {
+      print(cardNumberInput.controllers[0].text);
+    };
   }
 
   @override
